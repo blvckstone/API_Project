@@ -16,13 +16,13 @@ const articleSchema = mongoose.Schema({ //Schema
 const Article = mongoose.model("Article", articleSchema); //Model
 
 
-
+//GET request REST API Created successfully
 app.get("/articles", function(req, res){
 
     Article.find({}).then(function(foundAllArticles){
         console.log(foundAllArticles)
         res.send(foundAllArticles)
-    })
+    }).catch(function(err){res.send(err)})
 
 })
 

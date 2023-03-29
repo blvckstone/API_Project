@@ -16,51 +16,54 @@ const articleSchema = mongoose.Schema({ //Schema
 const Article = mongoose.model("Article", articleSchema); //Model
 
 
-//GET request REST API Created successfully
-app.get("/articles", function(req, res){
+//Chained route handling using express
+app.route("/articles")
+.get( //GET request REST API Created successfully
 
-    Article.find({}).then(function(foundAllArticles){
-        console.log(foundAllArticles)
-        res.send(foundAllArticles)
-    }).catch(function(err){res.send(err)})
+    function(req, res){
 
-})
-
-
-
-
-//POST request REST API Created successfully
-app.post("/articles", function(req, res){
+        Article.find({}).then(function(foundAllArticles){
+            console.log(foundAllArticles)
+            res.send(foundAllArticles)
+        }).catch(function(err){res.send(err)})
     
-    // console.log(req.body.title);
-    // console.log(req.body.content);
+    }
+)
 
-    const singlePostArticle = new Article({
-        title: req.body.title,
-        content: req.body.content
-    })
+.post(//POST request REST API Created successfully
 
-    singlePostArticle.save().then(function(){
-        res.send("Saved successfully!")
-    }).catch(function(err){
-        res.send(err)
-    })
+    function(req, res){
+    
+        // console.log(req.body.title);
+        // console.log(req.body.content);
+    
+        const singlePostArticle = new Article({
+            title: req.body.title,
+            content: req.body.content
+        })
+    
+        singlePostArticle.save().then(function(){
+            res.send("Saved successfully!")
+        }).catch(function(err){
+            res.send(err)
+        })
+    
+    }
+)
 
-});
 
+.delete(//DELETE request REST API Created successfully
 
+    function(req, res){
 
-
-//DELETE request REST API Created successfully
-app.delete("/articles", function(req, res){
-
-    Article.deleteMany({}).then(function(){
-        res.send("All documents deleted successfully")
-    }).catch(function(err){
-        res.send(err)
-    });
-
-})
+        Article.deleteMany({}).then(function(){
+            res.send("All documents deleted successfully")
+        }).catch(function(err){
+            res.send(err)
+        });
+    
+    }
+)
 
 
 

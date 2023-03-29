@@ -32,8 +32,8 @@ app.get("/articles", function(req, res){
 //POST request REST API Created successfully
 app.post("/articles", function(req, res){
     
-    console.log(req.body.title);
-    console.log(req.body.content);
+    // console.log(req.body.title);
+    // console.log(req.body.content);
 
     const singlePostArticle = new Article({
         title: req.body.title,
@@ -45,6 +45,20 @@ app.post("/articles", function(req, res){
     }).catch(function(err){
         res.send(err)
     })
+
+});
+
+
+
+
+//DELETE request REST API Created successfully
+app.delete("/articles", function(req, res){
+
+    Article.deleteMany({}).then(function(){
+        res.send("All documents deleted successfully")
+    }).catch(function(err){
+        res.send(err)
+    });
 
 })
 

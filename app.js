@@ -29,6 +29,26 @@ app.get("/articles", function(req, res){
 
 
 
+//POST request REST API Created successfully
+app.post("/articles", function(req, res){
+    
+    console.log(req.body.title);
+    console.log(req.body.content);
+
+    const singlePostArticle = new Article({
+        title: req.body.title,
+        content: req.body.content
+    })
+
+    singlePostArticle.save().then(function(){
+        res.send("Saved successfully!")
+    }).catch(function(err){
+        res.send(err)
+    })
+
+})
+
+
 
 
 app.listen(3000, function(){console.log("Server started at port 3000")}) 
